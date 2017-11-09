@@ -4133,8 +4133,8 @@ var XLSX = {};
         o[o.length] = (XML_HEADER);
         o[o.length] = (DRAW_ROOT);
 
-        for (var i = 0; i < images.length; i++) {
-            var image = images[i];
+        for (var sId = 1; sId < images.length + 1; sId++) {
+            var image = images[sId - 1];
             var pos = image.position || {};
             if (pos.type === 'twoCellAnchor') {
                 var from = pos.from || {}, to = pos.to || {},
@@ -4145,9 +4145,9 @@ var XLSX = {};
                 twoCell += '<xdr:to><xdr:col>' + toCol + '</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>' + toRow + '</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>';
                 twoCell += '<xdr:pic><xdr:nvPicPr><xdr:cNvPr id="' + rId + '" name="' + image.name + '">';
                 twoCell += '</xdr:cNvPr><xdr:cNvPicPr><a:picLocks noChangeAspect="1"/></xdr:cNvPicPr></xdr:nvPicPr>';
-                twoCell += '<xdr:blipFill><a:blip xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:embed="rId' + rId + '"/>';
+                twoCell += '<xdr:blipFill><a:blip xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:embed="rId' + sId + '"/>';
                 twoCell += '<a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic><xdr:clientData/>';
-                o[o.length] = (writextag('xdr:twoCellAnchor', twoCell, images[i].attrs));
+                o[o.length] = (writextag('xdr:twoCellAnchor', twoCell, image.attrs));
             }
         }
 
